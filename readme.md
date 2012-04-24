@@ -281,6 +281,46 @@ $('div.carousel').jCarouselLite({
 If you want to do some logic before the slide starts and after the slide ends, you can
 register these 2 callbacks. The functions will be passed two arguments. The first represents an array of elements that are visible at the time of callback. The second is a Boolean indicating whether the direction is forward (`true`) or backward (`false`);
 
+## Advanced Options
+
+### `childrenSelector` : string - default is 'li'
+
+example
+
+```javascript
+$('div.carousel').jCarouselLite({
+  childrenSelector: 'li.awesome';
+});
+```
+
+Use a custom selector to use for the carousel content. By default it grabs the children (only 1 level deep) li elements of the first ul. A custom selector like above would only use children li elements with the class 'awesome' for carousel content.
+
+### `useFindSelector` : boolean - default is false
+
+example
+
+```javascript
+$('div.carousel').jCarouselLite({
+  useFindSelector = true;
+  // findSelector = 'li'; //default
+});
+```
+
+Change the default behavior for selecting the content items. Use a find() method instead of a children() method. The default selector is still 'li'.
+
+### `findSelector` : string - default is 'li'
+
+example
+
+```javascript
+$('div.carousel').jCarouselLite({
+  useFindSelector = true;
+  findSelector = 'li.chunky, li.bacon';
+});
+```
+
+Use a custom selector to find the carousel content. Use in conjunction with the option useFindSelector set to true. If useFindSelector is left at the default of false, the findSelector option does nothing.
+
 ## Events
 
 The plugin binds a few custom event handlers to the wrapping `div` element. They can be triggered at any time by using jQuery's event triggering mechanism. If other custom events are bound to the same elements, you may wish to trigger these using the `.jc` namespace. For example, instead of `.trigger("pauseCarousel")`, you could write `.trigger("pauseCarousel.jc")`.
@@ -327,4 +367,3 @@ $('div.carousel').trigger('go', 3)
 $('div.carousel').trigger('go', '+=2')
 ```
 When triggering the `go` custom event, you can pass in a number or a string representing a relative number ("+=n" or "-=n") to specify which item in the carousel to go to. The default is "+=1" (i.e. the next item).
-

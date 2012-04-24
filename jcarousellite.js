@@ -33,9 +33,15 @@ $.fn.jCarouselLite = function(options) {
         sizeProp = o.vertical ? "height": "width",
         self = this,
         div = $(this),
-        ul = div.find('ul').eq(0),
-        tLi = ul.children('li'),
-        tl = tLi.length,
+        ul = div.find('ul').eq(0);
+
+    if (o.useFindSelector) {
+        var tLi = ul.find(o.findSelector);
+    } else {
+        var tLi = ul.children(o.childrenSelector);
+    }
+
+    var tl = tLi.length,
         visibleNum = o.visible,
         // need visibleCeil and visibleFloor in case we want a fractional number of visible items at a time
         visibleCeil = Math.ceil(visibleNum),
@@ -65,7 +71,7 @@ $.fn.jCarouselLite = function(options) {
       return activeBtnIndex;
     };
 
-    var li = ul.children('li'),
+    var li = $('li.spbox-el, li.gallery-item', ul) //ul.children('li'),
         itemLength = li.length,
         curr = start,
 
@@ -312,6 +318,11 @@ $.fn.jCarouselLite = function(options) {
   return this;
 };
 $.fn.jCarouselLite.defaults = {
+  // better control over selectors for li elements
+  childrenSelector: 'li',
+  useFindSelector: false,
+  findSelector: 'li',
+
   autoCSS: true,
   btnPrev: null,
   btnNext: null,

@@ -71,7 +71,7 @@ $.fn.jCarouselLite = function(options) {
       return activeBtnIndex;
     };
 
-    var li = $('li.spbox-el, li.gallery-item', ul) //ul.children('li'),
+    var li = ul.children(o.childrenSelector),
         itemLength = li.length,
         curr = start,
 
